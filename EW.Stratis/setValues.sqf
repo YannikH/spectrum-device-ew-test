@@ -14,11 +14,13 @@ private _values = [];
   for "_i" from 0 to (count _broadcasts - 1) step 2 do {
     private _freq = _broadcasts # _i;
     private _power = _broadcasts # (_i + 1);
-    if (_power > 0.1) then {
-      private _directionVect = (getPosASL player) vectorFromTo (getPosASL _vehicle);
+    if (_power > 0.1 && alive _vehicle) then {
+      private _directionVect = (eyePos player) vectorFromTo (getPosASL _vehicle);
       private _weaponDir = player weaponDirection currentWeapon player;
       private _vectDot = _weaponDir vectorDotProduct _directionVect;
+      private _relDir = player getRelDir _vehicle;
       _vectDot = (_vectDot ^ 30);
+      if (_relDir > 90 && _relDir < 270) then {_vectDot = 0};
       _values = _values + [_freq, _power * _vectDot * 100];
     };
   };

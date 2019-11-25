@@ -32,6 +32,7 @@ itc_land_ew_fnc_setValues = compile preprocessFileLineNumbers "setValues.sqf";
 itc_land_ew_fnc_setBroadcastPower = compile preprocessFileLineNumbers "setBroadcastPower.sqf";
 itc_land_ew_fnc_handlePerFrame = compile preprocessFileLineNumbers "handlePerFrame.sqf";
 itc_land_ew_fnc_getAntennaParams = compile preprocessFileLineNumbers "getAntennaParams.sqf";
+itc_land_ew_fnc_attemptJam = compile preprocessFileLineNumbers "attemptJam.sqf";
 
 {
   [_x] spawn itc_land_ew_fnc_manageTransmissions;

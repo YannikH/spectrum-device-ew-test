@@ -14,12 +14,19 @@ if (_currentWeapon != currentWeapon player || _attachment != (handgunItems playe
   _args set [0, _currentWeapon];
   _args set [1, _attachment];
   if (_currentWeapon == "hgun_esd_01_F") then {
-    systemChat "spectrum device selected";
     private _antennaParams = [_attachment] call itc_land_ew_fnc_getAntennaParams;
     { // forEach ["EM_FMin", "EM_FMax", "EM_SelMin", "EM_SelMax"];
       missionNameSpace setVariable [_x, _antennaParams # _foreachindex];
     } forEach ["#EM_FMin", "#EM_FMax", "#EM_SelMin", "#EM_SelMax"];
+    missionNameSpace setVariable ["#EM_Transmit", false];
   };
 };
 if (currentWeapon player != "hgun_esd_01_F") exitWith {};
 [] call itc_land_ew_fnc_setValues;
+
+if (inputAction "defaultAction" > 0) then {
+  [] call itc_land_ew_fnc_attemptJam;
+} else {
+  missionNameSpace setVariable ["#EM_Progress", 0];
+};
+missionNameSpace setVariable ["#EM_Transmit", (inputAction "defaultAction" > 0)];
